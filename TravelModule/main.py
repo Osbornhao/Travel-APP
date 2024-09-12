@@ -23,6 +23,3 @@ travelPlan2 = TravelPlan("Shanghai")
 travelPlan1.cityList.append(1)
 print(travelPlan1.cityList)
 print(travelPlan2.cityList)
-
-
-
