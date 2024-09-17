@@ -7,6 +7,7 @@ from Base import Base
 
 
 class Address(Base):
+    __tablename__ = "Address"
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(30))
     city: Mapped[City] = mapped_column(String(30))

@@ -6,6 +6,7 @@ from sqlalchemy.orm import mapped_column
 
 
 class City(Base):
+    __tablename__= "city"
     id: Mapped[int] = mapped_column(primary_key=True)
     city_name: Mapped[str] = mapped_column(String(30))
 
