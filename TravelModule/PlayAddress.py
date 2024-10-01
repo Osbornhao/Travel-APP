@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import String, ForeignKey, Column, Integer
 from Base import Base
 from sqlalchemy.orm import relationship
 from Address import Address
@@ -12,14 +12,19 @@ from datetime import datetime
 
 class PlayAddress(Address):
     __tablename__ = "PlayAddress"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    sight_name: Mapped[str] = mapped_column(String(30))
+    # sight_name: Mapped[str] = mapped_column(String(30))
     ticket_prices: Mapped[float] = mapped_column(Float)
     start_time: Mapped[str] = mapped_column(String(20))
-    address = mapped_column(ForeignKey('address.id'))
+    # address = relationship('Address')
+    city_id = Column(Integer, ForeignKey('city.id'))
+    id = mapped_column(ForeignKey('Address.id'), primary_key=True)
+    __mapper_args__ = {
+        "polymorphic_identity": "PlayAddress",
+    }
 
-    def __init__(self, city, street: str, name: str, date: str, price: float):
-        super(PlayAddress, self).__init__(city, street)
-        self.name = name
+    def __init__(self, city, street: str, name: str, date: str, price: float, start_time: str):
+        super(PlayAddress, self).__init__(city, street, name)
+        # self.sight_name = name
         self.date = date
-        self.price = price
+        self.ticket_prices = price
+        self.start_time = start_time
